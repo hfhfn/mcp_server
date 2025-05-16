@@ -2,7 +2,7 @@
 import uvicorn
 from starlette.applications import Starlette
 from starlette.routing import Mount
-from mcp_server import math_mcp, thumbnail_mcp, weather_mcp, filesystem_mcp
+import math_mcp, thumbnail_mcp, weather_mcp, filesystem_mcp
 
 
 server = filesystem_mcp.FileSystemMCPServer(["C:\\Users\\hfhfn\\Desktop\\dify"])
