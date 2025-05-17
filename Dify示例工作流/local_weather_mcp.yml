@@ -1,0 +1,744 @@
+app:
+  description: '" 使用时配置的MCP工具 "  示例
+
+    arrenxxxxx/mcp_config_during_use'
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: local_weather_mcp
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/gitee_ai:0.1.0@12d9d6b0de119fd0ac38e80518c14d9badcd5830b12808aff076f6060c3a3406
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: arrenxxxxx/mcp_config_during_use:0.0.1@6639610b619840c14ef4612a018b465c29314d888adcfb08fdc562ea4a652ec3
+kind: app
+version: 0.2.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 50
+        file_size_limit: 1024
+        image_file_size_limit: 100
+        video_file_size_limit: 10000
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1747368385933-source-1747368416101-target
+      source: '1747368385933'
+      sourceHandle: source
+      target: '1747368416101'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1747368416101-source-1747368449627-target
+      source: '1747368416101'
+      sourceHandle: source
+      target: '1747368449627'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1747368449627-source-1747368517131-target
+      source: '1747368449627'
+      sourceHandle: source
+      target: '1747368517131'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1747368517131-source-1747368688355-target
+      source: '1747368517131'
+      sourceHandle: source
+      target: '1747368688355'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1747368688355-source-1747368730949-target
+      source: '1747368688355'
+      sourceHandle: source
+      target: '1747368730949'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1747368730949-true-1747368738000-target
+      source: '1747368730949'
+      sourceHandle: 'true'
+      target: '1747368738000'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1747368738000-source-1747369136436-target
+      source: '1747368738000'
+      sourceHandle: source
+      target: '1747369136436'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: answer
+      id: 1747369136436-source-answer-target
+      source: '1747369136436'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: answer
+      id: 1747368730949-false-1747369178092-target
+      source: '1747368730949'
+      sourceHandle: 'false'
+      target: '1747369178092'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 54
+      id: '1747368385933'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The URL of the MCP Server with SSE endpoint.
+            ja_JP: The URL of the MCP Server with SSE endpoint.
+            pt_BR: The URL of the MCP Server with SSE endpoint.
+            zh_Hans: MCP服务器的SSE端点URL。
+          label:
+            en_US: Server URL
+            ja_JP: Server URL
+            pt_BR: Server URL
+            zh_Hans: 服务器地址
+          llm_description: The URL of the MCP Server with SSE endpoint.
+          max: null
+          min: null
+          name: server_url
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: HTTP headers in JSON format (e.g. {"Authorization":"Bearer token"}).
+            ja_JP: HTTP headers in JSON format (e.g. {"Authorization":"Bearer token"}).
+            pt_BR: HTTP headers in JSON format (e.g. {"Authorization":"Bearer token"}).
+            zh_Hans: HTTP请求头，JSON格式（例如：{"Authorization":"Bearer token"}）。
+          label:
+            en_US: Headers
+            ja_JP: Headers
+            pt_BR: Headers
+            zh_Hans: 请求头
+          llm_description: HTTP headers in JSON format (e.g. {"Authorization":"Bearer
+            token"}).
+          max: null
+          min: null
+          name: headers
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: 60
+          form: llm
+          human_description:
+            en_US: HTTP request timeout in seconds.
+            ja_JP: HTTP request timeout in seconds.
+            pt_BR: HTTP request timeout in seconds.
+            zh_Hans: HTTP请求超时时间（秒）。
+          label:
+            en_US: Timeout
+            ja_JP: Timeout
+            pt_BR: Timeout
+            zh_Hans: 超时时间
+          llm_description: HTTP request timeout in seconds.
+          max: null
+          min: null
+          name: timeout
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: 300
+          form: llm
+          human_description:
+            en_US: SSE read timeout in seconds (time to wait for SSE events).
+            ja_JP: SSE read timeout in seconds (time to wait for SSE events).
+            pt_BR: SSE read timeout in seconds (time to wait for SSE events).
+            zh_Hans: SSE读取超时时间（秒）（等待SSE事件的时间）。
+          label:
+            en_US: SSE Read Timeout
+            ja_JP: SSE Read Timeout
+            pt_BR: SSE Read Timeout
+            zh_Hans: SSE读取超时
+          llm_description: SSE read timeout in seconds (time to wait for SSE events).
+          max: null
+          min: null
+          name: sse_read_timeout
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        params:
+          headers: ''
+          server_url: ''
+          sse_read_timeout: ''
+          timeout: ''
+        provider_id: arrenxxxxx/mcp_config_during_use/mcp_config
+        provider_name: arrenxxxxx/mcp_config_during_use/mcp_config
+        provider_type: builtin
+        selected: false
+        title: 列出MCP工具
+        tool_configurations: {}
+        tool_description: 通过HTTP with SSE传输来列出MCP服务端工具。
+        tool_label: 列出MCP工具
+        tool_name: mcp_list_tools
+        tool_parameters:
+          server_url:
+            type: mixed
+            value: http://host.docker.internal:8888/weather/sse
+        type: tool
+      height: 54
+      id: '1747368416101'
+      position:
+        x: 380
+        y: 282
+      positionAbsolute:
+        x: 380
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1747369136436.result#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 2531
+        y: 293
+      positionAbsolute:
+        x: 2531
+        y: 293
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str) -> dict:\n    import json\n    arg1 = json.loads(arg1)[0]\n\
+          \    name = arg1.get(\"name\")\n    inputSchema = arg1.get(\"inputSchema\"\
+          )\n    description = arg1.get(\"description\")\n    return {\n        \"\
+          name\": name,\n        \"inputSchema\": json.dumps(inputSchema),\n     \
+          \   \"description\": json.dumps(\n            description\n        )\n \
+          \   }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          description:
+            children: null
+            type: string
+          inputSchema:
+            children: null
+            type: string
+          name:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1747368416101'
+          - text
+          variable: arg1
+      height: 54
+      id: '1747368449627'
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1747368416101'
+          - text
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params: {}
+          mode: chat
+          name: Qwen3-8B
+          provider: langgenius/gitee_ai/gitee_ai
+        prompt_template:
+        - id: 91bcba1b-3df1-4a8e-abc9-7fb91babb4ff
+          role: system
+          text: '根据mcp工具列表信息{{#context#}}，选择相应的工具，并特别注意详细描述：{{#1747368449627.description#}}中对于参数的要求，帮我生成工具的参数,
+            JSON格式的字符串（Python dict[str, Any]格式）, 不要输出```python```字符串，不要输出任何标准的json之外的字符。
+
+            若没有可用的工具，可自由回答。'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1747368517131'
+      position:
+        x: 980
+        y: 282
+      positionAbsolute:
+        x: 980
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(result) -> dict:\n    if result.find('</think>') != -1:\n\
+          \        start = result.find('</think>') + len('</think>')\n        result\
+          \ = result[start:].strip()\n    import json\n    try:\n        if isinstance(json.loads(result),\
+          \ dict):\n            param = 1\n        else:\n            param = 0\n\
+          \    except:\n        param = 0\n    return {\n        \"result\": result,\n\
+          \        \"param\": param\n    }\n\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          param:
+            children: null
+            type: number
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 2
+        type: code
+        variables:
+        - value_selector:
+          - '1747368517131'
+          - text
+          variable: result
+      height: 54
+      id: '1747368688355'
+      position:
+        x: 1280
+        y: 282
+      positionAbsolute:
+        x: 1280
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: a9a44ff7-19d0-4311-a7d9-9b3b14926723
+            value: '1'
+            varType: number
+            variable_selector:
+            - '1747368688355'
+            - param
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 126
+      id: '1747368730949'
+      position:
+        x: 1580
+        y: 282
+      positionAbsolute:
+        x: 1580
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The URL of the MCP Server with SSE endpoint.
+            ja_JP: The URL of the MCP Server with SSE endpoint.
+            pt_BR: The URL of the MCP Server with SSE endpoint.
+            zh_Hans: MCP服务器的SSE端点URL。
+          label:
+            en_US: Server URL
+            ja_JP: Server URL
+            pt_BR: Server URL
+            zh_Hans: 服务器地址
+          llm_description: The URL of the MCP Server with SSE endpoint.
+          max: null
+          min: null
+          name: server_url
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: HTTP headers in JSON format (e.g. {"Authorization":"Bearer token"}).
+            ja_JP: HTTP headers in JSON format (e.g. {"Authorization":"Bearer token"}).
+            pt_BR: HTTP headers in JSON format (e.g. {"Authorization":"Bearer token"}).
+            zh_Hans: HTTP请求头，JSON格式（例如：{"Authorization":"Bearer token"}）。
+          label:
+            en_US: Headers
+            ja_JP: Headers
+            pt_BR: Headers
+            zh_Hans: 请求头
+          llm_description: HTTP headers in JSON format (e.g. {"Authorization":"Bearer
+            token"}).
+          max: null
+          min: null
+          name: headers
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: 60
+          form: llm
+          human_description:
+            en_US: HTTP request timeout in seconds.
+            ja_JP: HTTP request timeout in seconds.
+            pt_BR: HTTP request timeout in seconds.
+            zh_Hans: HTTP请求超时时间（秒）。
+          label:
+            en_US: Timeout
+            ja_JP: Timeout
+            pt_BR: Timeout
+            zh_Hans: 超时时间
+          llm_description: HTTP request timeout in seconds.
+          max: null
+          min: null
+          name: timeout
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: 300
+          form: llm
+          human_description:
+            en_US: SSE read timeout in seconds (time to wait for SSE events).
+            ja_JP: SSE read timeout in seconds (time to wait for SSE events).
+            pt_BR: SSE read timeout in seconds (time to wait for SSE events).
+            zh_Hans: SSE读取超时时间（秒）（等待SSE事件的时间）。
+          label:
+            en_US: SSE Read Timeout
+            ja_JP: SSE Read Timeout
+            pt_BR: SSE Read Timeout
+            zh_Hans: SSE读取超时
+          llm_description: SSE read timeout in seconds (time to wait for SSE events).
+          max: null
+          min: null
+          name: sse_read_timeout
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Name of the tool to execute.
+            ja_JP: Name of the tool to execute.
+            pt_BR: Name of the tool to execute.
+            zh_Hans: 要执行的工具的名称。
+          label:
+            en_US: Tool Name
+            ja_JP: Tool Name
+            pt_BR: Tool Name
+            zh_Hans: 工具名称
+          llm_description: Name of the tool to execute.
+          max: null
+          min: null
+          name: tool_name
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Tool arguments (JSON string in the python dict[str, Any] format).
+            ja_JP: Tool arguments (JSON string in the python dict[str, Any] format).
+            pt_BR: Tool arguments (JSON string in the python dict[str, Any] format).
+            zh_Hans: 工具的参数，JSON格式的字符串（Python dict[str, Any]格式）。
+          label:
+            en_US: Arguments
+            ja_JP: Arguments
+            pt_BR: Arguments
+            zh_Hans: 参数
+          llm_description: Tool arguments (JSON string in the python dict[str, Any]
+            format).
+          max: null
+          min: null
+          name: arguments
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          arguments: ''
+          headers: ''
+          server_url: ''
+          sse_read_timeout: ''
+          timeout: ''
+          tool_name: ''
+        provider_id: arrenxxxxx/mcp_config_during_use/mcp_config
+        provider_name: arrenxxxxx/mcp_config_during_use/mcp_config
+        provider_type: builtin
+        selected: false
+        title: 调用MCP工具
+        tool_configurations: {}
+        tool_description: 通过HTTP with SSE传输来调用MCP服务端工具。
+        tool_label: 调用MCP工具
+        tool_name: mcp_call_tool
+        tool_parameters:
+          arguments:
+            type: mixed
+            value: '{{#1747368688355.result#}}'
+          server_url:
+            type: mixed
+            value: http://host.docker.internal:8888/weather/sse
+          tool_name:
+            type: mixed
+            value: '{{#1747368449627.name#}}'
+        type: tool
+      height: 54
+      id: '1747368738000'
+      position:
+        x: 1915
+        y: 293
+      positionAbsolute:
+        x: 1915
+        y: 293
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str) -> dict:\n    import json\n    arg1 = json.loads(arg1)[0].get(\"\
+          text\")\n    result = json.dumps(arg1, ensure_ascii=False).replace(\"\\\\\
+          n\", \"\\n\").replace(\"\\\"\", \"\")\n    return {\n        \"result\"\
+          : result,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 3
+        type: code
+        variables:
+        - value_selector:
+          - '1747368738000'
+          - text
+          variable: arg1
+      height: 54
+      id: '1747369136436'
+      position:
+        x: 2219
+        y: 293
+      positionAbsolute:
+        x: 2219
+        y: 293
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1747368688355.result#}}'
+        desc: ''
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 105
+      id: '1747369178092'
+      position:
+        x: 1915
+        y: 386
+      positionAbsolute:
+        x: 1915
+        y: 386
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -86.5980254760434
+      y: 318.6599631353285
+      zoom: 0.7578582832551992
