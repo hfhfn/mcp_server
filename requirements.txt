@@ -1,0 +1,5 @@
+fastmcp
+uvicorn[standard]
+
+# newsnow_mcp
+httpx

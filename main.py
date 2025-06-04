@@ -2,7 +2,7 @@
 import uvicorn
 from starlette.applications import Starlette
 from starlette.routing import Mount
-import math_mcp, thumbnail_mcp, weather_mcp, filesystem_mcp
+import math_mcp, thumbnail_mcp, weather_mcp, filesystem_mcp, newsnow_mcp
 
 
 server = filesystem_mcp.FileSystemMCPServer(["C:\\Users\\hfhfn\\Desktop\\dify"])
@@ -11,8 +11,7 @@ math_mcp.mcp.settings.mount_path = "/math"
 thumbnail_mcp.mcp.settings.mount_path = "/thumbnail"
 weather_mcp.mcp.settings.mount_path = "/weather"
 server.mcp.settings.mount_path = "/file"
-# thumbnail_mcp.mcp.settings.streamable_http_path = "/mcp"
-# math_mcp.mcp.settings.streamable_http_path = "/math"
+newsnow_mcp.app.settings.mount_path = "/newsnow"
 
 # Create Starlette app with multiple mounted servers
 app = Starlette(
@@ -25,6 +24,7 @@ app = Starlette(
         Mount("/thumbnail", app=thumbnail_mcp.mcp.sse_app()),
         Mount("/weather", app=weather_mcp.mcp.sse_app()),
         Mount("/file", app=server.mcp.sse_app()),
+        Mount("/newsnow", app=server.mcp.sse_app()),
     ]
 )
 
