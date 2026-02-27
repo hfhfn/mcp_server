@@ -5,16 +5,20 @@ from typing import Any
 from mcp.server.fastmcp import FastMCP
 from dotenv import load_dotenv
 
+# 步骤 1: 加载 .env 文件中的环境变量
 load_dotenv()
 
+# 初始化 MCP 服务器实例
 # 初始化 MCP 服务器
 mcp = FastMCP("WeatherServer")
 
 # OpenWeather API 配置
+# 步骤 2: 配置 OpenWeather API 的基础 URL 和 API KEY
 OPENWEATHER_API_BASE = "https://api.openweathermap.org/data/2.5/weather"
 API_KEY = os.getenv("OPENWEATHER_API_KEY")  # 请替换为你自己的 OpenWeather API Key
 USER_AGENT = "weather-app/1.0"
 
+# 步骤 3: 定义内部辅助函数：获取天气原始数据
 async def fetch_weather(city: str) -> dict[str, Any] | None:
     """
     从 OpenWeather API 获取天气信息。
@@ -31,6 +35,7 @@ async def fetch_weather(city: str) -> dict[str, Any] | None:
 
     async with httpx.AsyncClient() as client:
         try:
+            # 发起异步 GET 请求
             response = await client.get(OPENWEATHER_API_BASE, params=params, headers=headers, timeout=30.0)
             response.raise_for_status()
             return response.json()  # 返回字典类型
@@ -39,10 +44,11 @@ async def fetch_weather(city: str) -> dict[str, Any] | None:
         except Exception as e:
             return {"error": f"请求失败: {str(e)}"}
 
+# 步骤 4: 定义内部辅助函数：美化输出格式
 def format_weather(data: dict[str, Any] | str) -> str:
     """
     将天气数据格式化为易读文本。
-    :param data: 天气数据（可以是字典或 JSON 字符串）
+    :param data: 天气数据（可以是字典 or JSON 字符串）
     :return: 格式化后的天气信息字符串
     """
     # 如果传入的是字符串，则先转换为字典
@@ -56,16 +62,17 @@ def format_weather(data: dict[str, Any] | str) -> str:
     if "error" in data:
         return f"⚠️ {data['error']}"
 
-    # 提取数据时做容错处理
+    # 提取数据并进行容错处理
     city = data.get("name", "未知")
     country = data.get("sys", {}).get("country", "未知")
     temp = data.get("main", {}).get("temp", "N/A")
     humidity = data.get("main", {}).get("humidity", "N/A")
     wind_speed = data.get("wind", {}).get("speed", "N/A")
-    # weather 可能为空列表，因此用 [0] 前先提供默认字典
+    # weather 可能为空列表，因此引用前提供默认字典
     weather_list = data.get("weather", [{}])
     description = weather_list[0].get("description", "未知")
 
+    # 返回美化后的多行文本
     return (
         f"🌍 {city}, {country}\n"
         f"🌡 温度: {temp}°C\n"
@@ -74,6 +81,7 @@ def format_weather(data: dict[str, Any] | str) -> str:
         f"🌤 天气: {description}\n"
     )
 
+# 步骤 5: 注册 MCP 工具，供大模型调用
 @mcp.tool()
 async def query_weather(city: str) -> str:
     """
@@ -81,9 +89,11 @@ async def query_weather(city: str) -> str:
     :param city: 城市名称（需使用英文）
     :return: 格式化后的天气信息
     """
+    # 核心逻辑：获取数据 -> 格式化 -> 返回
     data = await fetch_weather(city)
     return format_weather(data)
 
+# 步骤 6: 独立运行配置（stdio 模式常用于集成到 Claude Desktop 等客户端）
 if __name__ == "__main__":
     # 以标准 I/O 方式运行 MCP 服务器
     mcp.run(transport='stdio')

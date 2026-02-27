@@ -1,0 +1,23 @@
+[project]
+name = "mcp-server"
+version = "0.1.0"
+description = "MCP 多服务聚合平台与自动化工具示例"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=0.1.0",
+    "fastmcp",
+    "starlette",
+    "uvicorn",
+    "httpx",
+    "python-dotenv",
+    "beautifulsoup4",
+    "Pillow",
+    "requests",
+    "langchain-openai",
+    "langgraph",
+    "langchain-mcp-adapters"
+]
+
+[project.scripts]
+mcp-server = "main:main"
