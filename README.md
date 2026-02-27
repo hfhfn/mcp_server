@@ -92,12 +92,11 @@ http://host.docker.internal:8000/mcp  # docker容器内访问
 1.  **环境准备**：
     在项目根目录下运行以下命令，安装 MCP 命令行工具：
 
-````bash
-    uv add "mcp[cli]"
-    ```
+```bash
+uv add "mcp[cli]"
+```
 
 2.  **启动配置**：
     在配置客户端时，使用 `uv` 作为命令，并配合 `--directory` 参数指定项目路径。
     - **命令**: `uv`
     - **参数**: `["--directory", "/Users/hfhfn/charmProjects/mcp_server/", "run", "main.py"]`
-````
